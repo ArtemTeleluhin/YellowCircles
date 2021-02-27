@@ -1,18 +1,18 @@
 import sys
 
-from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtCore import QPoint
 from random import randint
+from UI import Ui_Form
 
 N = 5
 
 
-class MyWidget(QWidget):
+class MyWidget(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
 
         self.paint = False
         self.pushButton.clicked.connect(self.button_draw)
@@ -32,8 +32,8 @@ class MyWidget(QWidget):
     def draw_squares(self, qp):
         wight = self.size().width()
         height = self.size().height()
-        qp.setPen(QColor(220, 220, 0))
         for _ in range(N):
+            qp.setPen(QColor(randint(0, 255), randint(0, 255), randint(0, 255)))
             r = randint(0, min(wight, height) // 2)
             x = randint(0, wight)
             y = randint(0, height)
